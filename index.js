@@ -1,6 +1,17 @@
 // CTF - SQL Injection no Login
 // Tecnologias: Node.js, Express, SQLite
 
+// EXPLORAÇÃO DA VULNERABILIDADE SQL INJECTION:
+// 
+// 1. BYPASS BÁSICO - Username: admin'-- (Password: qualquer_coisa)
+//    O '--' comenta o resto da query, ignorando verificação de senha
+//
+// 2. OR 1=1 - Username: admin' OR 1=1-- (Password: qualquer_coisa)  
+//    '1=1' é sempre verdadeiro, retorna todos usuários
+//
+// 3. BYPASS NO PASSWORD - Username: admin (Password: ' OR '1'='1)
+//    Torna a condição sempre verdadeira no campo senha
+
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 const bodyParser = require('body-parser');
